@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_gravity="bottom"
+              android:background="#ffffff">
+
+    <LinearLayout
+            android:id="@+id/ll_homepage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:scaleX="0.6"
+            android:scaleY="0.6"
+            android:orientation="vertical">
+
+        <ImageView
+                android:id="@+id/iv_homepage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/guide_home_on"/>
+
+        <TextView
+                android:id="@+id/tv_homepage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="首页"
+                android:textColor="@color/tb_red"
+                android:textStyle="normal"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/ll_weitao"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:scaleX="0.6"
+            android:scaleY="0.6"
+            android:scaleType="fitXY"
+            android:orientation="vertical">
+
+        <ImageView
+                android:id="@+id/iv_weitao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/guide_weitao_nm"/>
+
+        <TextView
+                android:id="@+id/tv_weitao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="微淘"
+                android:textColor="#000000"
+                android:textStyle="normal"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/ll_discover"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:scaleX="0.6"
+            android:scaleY="0.6"
+            android:scaleType="fitXY"
+            android:orientation="vertical">
+
+        <ImageView
+                android:id="@+id/iv_discover"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/guide_discover_nm"/>
+
+        <TextView
+                android:id="@+id/tv_discover"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="问大家"
+                android:textColor="#000000"
+                android:textStyle="normal"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/ll_cart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:scaleX="0.6"
+            android:scaleY="0.6"
+
+            android:scaleType="fitXY"
+            android:orientation="vertical">
+
+        <ImageView
+                android:id="@+id/iv_cart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/guide_cart_nm"/>
+
+        <TextView
+                android:id="@+id/tv_cart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="购物车"
+                android:textColor="#000000"
+                android:textStyle="normal"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/ll_account"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:scaleX="0.6"
+            android:scaleY="0.6"
+            android:orientation="vertical">
+
+        <ImageView
+                android:id="@+id/iv_account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/guide_account_nm"/>
+
+        <TextView
+                android:id="@+id/tv_account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我的淘宝"
+                android:textColor="#000000"
+                android:textStyle="normal"/>
+    </LinearLayout>
+
+</LinearLayout>
