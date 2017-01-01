@@ -1,5 +1,8 @@
 package demo.groupnine.taobaodemo.net;
 
+import com.google.gson.Gson;
+import demo.groupnine.taobaodemo.homepage.Category;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,21 +10,42 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class HttpRequest {
+    private static String server = "192.168.123.123:8080";
 
     // default empty constructor
 
     // methods for application to use
 
-    public void checkUserLogin(String UrlSpec, HttpCallbackListener listener)
+    public static void getCategory(final String UrlParam, final HttpCallbackListener listener)
     {
-        // TODO
+        new Thread(new Runnable() {
+            @Override
+            public void run()
+            {
+                try {
+                    String Url = server + "/getCategory.action" + UrlParam;
+                    String JsonStr = getUrlString(Url);
+
+                    Gson g = new Gson();
+                    Category c = g.fromJson(JsonStr, Category.class);
+
+                    if (listener != null) {
+                        listener.onFinish(c);
+                    }
+                } catch (Exception e) {
+                    if (listener != null) {
+                        listener.onError(e);
+                    }
+                }
+            }
+        }).start();
     }
 
     // TODO by 董豪
 
     // low level methods
 
-    public byte[] getUrlBytes(String urlSpec)
+    public static byte[] getUrlBytes(String urlSpec)
             throws IOException
     {
         URL url = new URL(urlSpec);
@@ -49,9 +73,16 @@ public class HttpRequest {
         }
     }
 
-    public String getUrlString(String urlSpec)
+    public static String getUrlString(String urlSpec)
             throws IOException
     {
         return new String(getUrlBytes(urlSpec));
+    }
+
+    // server address setting
+
+    public static void setServer(String addr)
+    {
+        server = addr;
     }
 }
