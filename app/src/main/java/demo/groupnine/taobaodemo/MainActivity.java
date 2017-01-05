@@ -43,6 +43,10 @@ public class MainActivity
         initFragment(1);
 
         setTitle("淘宝");
+
+        /* First start: initView -> initListener -> hideFragment -> initFragment
+         * Click:       onClick -> restartBotton -> hideFragment -> initFragment
+         */
     }
 
     // private methods

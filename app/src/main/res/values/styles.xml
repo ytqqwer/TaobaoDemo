@@ -13,5 +13,7 @@
         <item name="colorPrimary">@color/tb_red</item>
         <item name="colorPrimaryDark">#300f00</item>
         <item name="colorAccent">@color/tb_h_red</item>
+        <item name="android:colorBackground">@color/white</item>
     </style>
+
 </resources>
