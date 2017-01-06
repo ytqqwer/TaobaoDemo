@@ -39,6 +39,11 @@
                 android:screenOrientation="portrait"
                 android:parentActivityName=".MainActivity">
         </activity>
+        <activity
+                android:screenOrientation="portrait"
+                android:name=".homepage.GoodsDetailActivity">
+        </activity>
     </application>
+
 
 </manifest>

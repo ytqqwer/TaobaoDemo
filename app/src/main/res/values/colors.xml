@@ -10,6 +10,8 @@
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
     <color name="light_gray">#eeeeee</color>
-
-
+    <color name="dark_gray">#8c8c8c</color>
+    <color name="goodsDetail_light_gray">#fafafa</color>
+    <color name="goodsDetail_dark_gray">#dddddd</color>
+    <color name="goodsDetail_orange">#FF8C00</color>
 </resources>
