@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <TextView android:id="@+id/attributeValue"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:padding="5dp"
+              android:layout_margin="5dp"
+              android:background="@color/light_gray"
+              android:textSize="12sp"
+              android:textColor="@color/dark_gray"
+              android:text="尊贵白 移动 4 G 定制版"/>
+
+    <TextView android:id="@+id/attributeId"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:visibility="invisible"/>
+    <TextView android:id="@+id/attrPrice"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:visibility="invisible"/>
+</LinearLayout>

@@ -23,7 +23,7 @@ import java.util.Random;
 
 public class SearchFragment
         extends Fragment {
-    private static String TAG = "SearchFragment";
+    private static String TAG = SearchFragment.class.toString();
 
     // data model
     private List<GoodsBrief> mGoods;

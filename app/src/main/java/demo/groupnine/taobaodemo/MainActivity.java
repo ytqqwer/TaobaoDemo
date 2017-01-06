@@ -1,15 +1,17 @@
 package demo.groupnine.taobaodemo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.support.v4.app.FragmentTransaction;
-import android.view.View;
 import demo.groupnine.taobaodemo.account.AccountFragment;
+import demo.groupnine.taobaodemo.homepage.GoodsDetailActivity;
 import demo.groupnine.taobaodemo.homepage.HomepageFragment;
 import demo.groupnine.taobaodemo.shoppingcart.CartFragment;
 
@@ -150,7 +152,14 @@ public class MainActivity
                 tv_account.setTextColor(getResources().getColor(R.color.tb_red));
                 initFragment(5);
                 setTitle("设置");
+
+                //TODO delete it after debug GoodsDetailActivity
+                // Intent intent = new Intent(this, GoodsDetailActivity.class);
+                // intent.putExtra("goodsId", "12345789");
+                // startActivity(intent);
+                // end
                 break;
+
             default:
                 break;
         }
