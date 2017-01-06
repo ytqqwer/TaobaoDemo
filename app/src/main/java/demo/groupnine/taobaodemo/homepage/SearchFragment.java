@@ -13,6 +13,8 @@ import android.view.*;
 import android.widget.ImageView;
 import android.widget.TextView;
 import demo.groupnine.taobaodemo.R;
+import demo.groupnine.taobaodemo.net.HttpCallbackListener;
+import demo.groupnine.taobaodemo.net.HttpRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -298,7 +300,7 @@ public class SearchFragment
         }
 
         @Override
-        public void onBindViewHolder(GoodsHolder holder, int position)
+        public void onBindViewHolder(final GoodsHolder holder, int position)
         {
             GoodsBrief item = mGoods.get(position);
             Drawable placeHolder = getResources().getDrawable(R.drawable.doge);
@@ -306,11 +308,22 @@ public class SearchFragment
 
             // TODO
             /*
-            holder.setGoodsName(mGoods.get(position).goodsName);
-            holder.setGoodsPrice(mGoods.get(position).price);
-            holder.setmGoodsSales(mGoods.get(position).sales);
-            BitmapDrawable img = HttpRequest.getImage(mGoods.get(position).imageAddr);
-            holder.bindDrawable(img);
+            holder.setGoodsName(item.goodsName);
+            holder.setGoodsPrice(item.price);
+            holder.setmGoodsSales(item.sales);
+            final String imgAddr = item.imageAddr;
+            HttpRequest.getImage(imgAddr,
+                    new HttpCallbackListener() {
+                        public void onFinish(Object o)
+                        {
+                            holder.bindDrawable((Drawable) o);
+                        }
+
+                        public void onError(Exception e)
+                        {
+                            Log.d(TAG, "fetch image " + imgAddr + " failed.");
+                        }
+                    });
             */
         }
 
