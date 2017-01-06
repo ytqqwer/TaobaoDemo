@@ -42,7 +42,7 @@ public class MainActivity
         initListener();
         initFragment(1);
 
-        setTitle("淘宝");
+        setTitle("Taobao Demo");
 
         /* First start: initView -> initListener -> hideFragment -> initFragment
          * Click:       onClick -> restartBotton -> hideFragment -> initFragment
@@ -137,7 +137,7 @@ public class MainActivity
                 iv_homepage.setImageResource(R.drawable.guide_home_on);
                 tv_homepage.setTextColor(getResources().getColor(R.color.tb_red));
                 initFragment(1);
-                setTitle("淘宝");
+                setTitle("Taobao Demo");
                 break;
             case R.id.ll_cart:
                 iv_cart.setImageResource(R.drawable.guide_cart_on);
