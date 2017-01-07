@@ -1,6 +1,7 @@
 package demo.groupnine.taobaodemo.homepage;
 
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -37,6 +38,8 @@ public class SearchFragment
     private RecyclerView mGoodsRecyclerView;
     private GoodsAdapter mAdapter;
     private View mBlankListPrompt;
+    // thread
+    public boolean hasFetchedResult;
 
     // lifetime methods
 
@@ -139,9 +142,7 @@ public class SearchFragment
             @Override
             public boolean onQueryTextChange(String s)
             {
-                mKeyword = s;
-                fetchResult();
-                updateResultUI();
+                // do noting
                 return false;
             }
         });
@@ -177,17 +178,17 @@ public class SearchFragment
      */
     private void fetchResult()
     {
-        // -- debug begin
+        /* debug in local
         mGoods = new ArrayList<GoodsBrief>();
         int total = Math.abs(new Random().nextInt()) % 10;
         Log.d(TAG, "doge total: " + total);
         for (int i = 0; i < total; i++) {
             mGoods.add(new GoodsBrief());
         }
-        // -- debug end
+        */
 
-        /*
-        HttpRequest.getGoodsBriefByKeyword("?keyword=" + keyword
+        hasFetchedResult = false;
+        HttpRequest.getGoodsBriefByKeyword("?keyword=" + mKeyword
                         + "&maxNumInOnePage=200"
                         + "&pageNum=1"
                         + "&sortByPrice=" + mSortByPrice
@@ -197,6 +198,7 @@ public class SearchFragment
                     public void onFinish(Object responese)
                     {
                         mGoods = (List<GoodsBrief>) responese;
+                        hasFetchedResult = true;
                     }
 
                     @Override
@@ -205,7 +207,15 @@ public class SearchFragment
                         Log.d(TAG, "request failed");
                     }
                 });
-        */
+
+        while (!hasFetchedResult) {
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                // do nothing
+            }
+        }
+
     }
 
     /* 作用: 根据 model 更新 UI
@@ -251,26 +261,46 @@ public class SearchFragment
 
         // public methods
 
-        public void bindDrawable(Drawable drawable)
+        public void bindGoods(final GoodsBrief g)
         {
-            mItemImageView.setImageDrawable(drawable);
-        }
+            mGoodsNameTV.setText(g.goodsName);
+            mGoodsPriceTV.setText("￥ " + g.price);
+            mGoodsSalesTV.setText(g.sales + "人付款");
+            /*
+            mItemImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v)
+                {
+                    Intent intent = new Intent(getActivity(), GoodsDetailActivity.class);
+                    intent.putExtra("goodsId", g.goodsId);
+                    startActivity(intent);
+                }
+            });
+            */
+            Drawable placeHolder = getResources().getDrawable(R.drawable.img_place_holder);
+            mItemImageView.setImageDrawable(placeHolder);
 
-        public void setGoodsName(String name)
-        {
-            mGoodsNameTV.setText(name);
-        }
+            final String imgAddr = g.imageAddr;
+            HttpRequest.getImage(imgAddr,
+                    new HttpCallbackListener() {
+                        public void onFinish(Object o)
+                        {
+                            final Drawable img = (Drawable) o;
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run()
+                                {
+                                    mItemImageView.setImageDrawable(img);
+                                }
+                            });
+                        }
 
-        public void setGoodsPrice(String price)
-        {
-            mGoodsPriceTV.setText(price);
+                        public void onError(Exception e)
+                        {
+                            Log.d(TAG, "fetch image " + imgAddr + " failed.");
+                        }
+                    });
         }
-
-        public void setmGoodsSales(String sales)
-        {
-            mGoodsSalesTV.setText(sales);
-        }
-
     }
 
 ////////////////////////////////////////////////////////////
@@ -303,28 +333,7 @@ public class SearchFragment
         public void onBindViewHolder(final GoodsHolder holder, int position)
         {
             GoodsBrief item = mGoods.get(position);
-            Drawable placeHolder = getResources().getDrawable(R.drawable.doge);
-            holder.bindDrawable(placeHolder);
-
-            // TODO
-            /*
-            holder.setGoodsName(item.goodsName);
-            holder.setGoodsPrice(item.price);
-            holder.setmGoodsSales(item.sales);
-            final String imgAddr = item.imageAddr;
-            HttpRequest.getImage(imgAddr,
-                    new HttpCallbackListener() {
-                        public void onFinish(Object o)
-                        {
-                            holder.bindDrawable((Drawable) o);
-                        }
-
-                        public void onError(Exception e)
-                        {
-                            Log.d(TAG, "fetch image " + imgAddr + " failed.");
-                        }
-                    });
-            */
+            holder.bindGoods(item);
         }
 
         @Override
