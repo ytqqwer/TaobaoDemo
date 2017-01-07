@@ -1,8 +1,7 @@
 package demo.groupnine.taobaodemo.shoppingcart;
 
 
-public class SuccessFail{
-    int success;
-    int fail;
-
+public class SuccessFail {
+    String success;
+    String fail;
 }
