@@ -62,6 +62,32 @@ public class HttpRequest {
     }
 
 
+    //登录
+    public static void login(final String UrlParam, final HttpCallbackListener listener)
+    {
+        new Thread(new Runnable() {
+            @Override
+            public void run()
+            {
+                try {
+                    String Url = server + "/checkUserLogin.action" + UrlParam;
+                    getUrlBytes(Url);
+
+                    // 现在已经能保证登录，等 LoginActivity 写好之后在修改此接口实现
+
+                    if (listener != null) {
+                        listener.onFinish(null);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    if (listener != null) {
+                        listener.onError(e);
+                    }
+                }
+            }
+        }).start();
+    }
+
     //获取分类信息
     public static void getCategory(final String UrlParam, final HttpCallbackListener listener)
     {
