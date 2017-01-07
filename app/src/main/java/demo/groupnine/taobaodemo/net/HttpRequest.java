@@ -1,6 +1,5 @@
 package demo.groupnine.taobaodemo.net;
 
-import android.database.sqlite.SQLiteCantOpenDatabaseException;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 import com.google.gson.Gson;
@@ -29,6 +28,9 @@ public class HttpRequest {
     private static final String TAG = "HttpRequest";
     private static String server = "http://192.168.123.123:8080/oss";
     private static String mCookie;
+
+    public static boolean loginSuccess;
+    public static boolean hasTriedLogin;
 
     // default empty constructor
 
@@ -65,26 +67,42 @@ public class HttpRequest {
 
 
     //登录
-    public static void login(final String UrlParam, final HttpCallbackListener listener)
+    public synchronized static void login(final String UrlParam)
     {
         new Thread(new Runnable() {
             @Override
             public void run()
             {
                 try {
-                    String Url = server + "/checkUserLogin.action" + UrlParam;
-                    getUrlBytes(Url);
+                    String UrlStr = server + "/checkUserLogin.action" + UrlParam;
+                    URL url = new URL(UrlStr);
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    mCookie = null;
 
-                    // 现在已经能保证登录，等 LoginActivity 写好之后在修改此接口实现
+                    try {
+                        conn.setInstanceFollowRedirects(false);
 
-                    if (listener != null) {
-                        listener.onFinish(null);
+                        // 先不考虑多线程同时访问 mCookie 的问题
+                        String[] cookieLine = conn.getHeaderField("Set-Cookie").split(";");
+                        mCookie = cookieLine[0];
+                        Log.d(TAG, "get cookie: " + mCookie);
+
+                        // 根据重定向地址判定是否登录成功
+                        if (conn.getHeaderField("Location").contains("index")) {
+                            loginSuccess = true;
+                        } else {
+                            loginSuccess = false;
+                        }
+
+                    } finally {
+                        conn.disconnect();
                     }
                 } catch (Exception e) {
+                    // do nothing
                     e.printStackTrace();
-                    if (listener != null) {
-                        listener.onError(e);
-                    }
+                } finally {
+                    // 为了跟 LoginActivity 协作
+                    hasTriedLogin = true;
                 }
             }
         }).start();
@@ -552,13 +570,6 @@ public class HttpRequest {
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             InputStream in = conn.getInputStream();
 
-            if (mCookie == null) {
-                // 先不考虑多线程同时访问 mCooie 的问题
-                String[] cookieLine = conn.getHeaderField("Set-Cookie").split(";");
-                mCookie = cookieLine[0];
-                Log.d(TAG, "get cookie: " + mCookie);
-            }
-
             if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
                 throw new IOException(conn.getResponseMessage()
                         + ": with"
@@ -587,6 +598,6 @@ public class HttpRequest {
 
     public static void setServer(String addr)
     {
-        server = addr;
+        server = "http://" + addr + "/OSS";
     }
 }
