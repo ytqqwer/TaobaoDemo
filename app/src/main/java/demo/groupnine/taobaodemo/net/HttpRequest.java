@@ -42,7 +42,9 @@ public class HttpRequest {
             public void run()
             {
                 try {
-                    String Url = server + imgAddr;
+                    String[] serverSegArr = server.split("/");
+                    String imgServer = serverSegArr[0] + "//" + serverSegArr[2] + "/images";
+                    String Url = imgServer + imgAddr;
                     byte[] imgBytes = getUrlBytes(Url);
 
                     InputStream is = new ByteArrayInputStream(imgBytes);
