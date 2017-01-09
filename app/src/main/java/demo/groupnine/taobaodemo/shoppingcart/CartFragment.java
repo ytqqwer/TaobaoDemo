@@ -171,13 +171,18 @@ public class CartFragment
             LayoutInflater inflater = LayoutInflater.from(getActivity());
             for (int i = 0; i < c.goodsInThisShop.size(); i++) {
                 final GoodsItemInSC g = c.goodsInThisShop.get(i);
-                View eachGoodsView = inflater.inflate(R.layout.cart_item_header, null, false);
+                // TODO
+                // 这一步得到的 eachGoodsView 为 null
+
+                LinearLayout eachGoodsView = (LinearLayout) inflater.inflate(R.layout.cart_item_body, null, false);
                 mGoodsContainerLL.addView(eachGoodsView);
                 mGoodsViewAdded.add(eachGoodsView);
 
                 /* 3.1 图片 */
 
                 final ImageView imgView = (ImageView) eachGoodsView.findViewById(R.id.cart_body_goods_pic);
+                //Log.d(TAG, "child count = " + eachGoodsView.getChildCount());
+                //final ImageView imgView = (ImageView) eachGoodsView.getChildAt(0);
                 final String gid = g.goodsId;
                 imgView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -193,7 +198,7 @@ public class CartFragment
 
                 Drawable placeHolder = getResources().getDrawable(R.drawable.img_place_holder);
                 imgView.setImageDrawable(placeHolder);
-                HttpRequest.getImage(g.goodsInfo.previewImageAddr,
+                HttpRequest.getImage(g.goods.imageAddr,
                         new HttpCallbackListener() {
                             @Override
                             public void onFinish(Object responese)
@@ -219,7 +224,7 @@ public class CartFragment
                 /* 3.2 商品名 */
 
                 TextView goodsName = (TextView) eachGoodsView.findViewById(R.id.cart_body_goods_name);
-                goodsName.setText(g.goodsInfo.goodsName);
+                goodsName.setText(g.goods.goodsName);
 
                 /* 3.3 商品属性与商品价格 */
 
@@ -227,7 +232,7 @@ public class CartFragment
                 TextView goodsPrice = (TextView) eachGoodsView.findViewById(R.id.cart_body_goods_price);
                 String attrValue = "默认属性";
                 String price = "￥ ";
-                for (GoodsAttrString attr : g.goodsInfo.goodsAttrs) {
+                for (GoodsAttrString attr : g.goods.goodsAttrs) {
                     if (attr.attributeId.equals(g.attributeId)) {
                         attrValue = attr.attributeValue;
                         price = attr.price;
@@ -239,7 +244,7 @@ public class CartFragment
 
                 /* 3.5 商品数量 */
 
-                TextView goodsNum = (TextView) eachGoodsView.findViewById(R.id.cart_body_goods_num);
+                final TextView goodsNum = (TextView) eachGoodsView.findViewById(R.id.cart_body_goods_num);
                 goodsNum.setText(g.goodsNum);
                 mGoodsNums.add(g.goodsNum);
 
@@ -252,7 +257,11 @@ public class CartFragment
                     @Override
                     public void onClick(View v)
                     {
-                        HttpRequest.updateGoodsNumInShoppingCart("?id=" + g.goodsId,
+                        int newNum = Integer.valueOf(mGoodsNums.get(currGoodsIndex)) - 1;
+                        final String newNumStr = Integer.valueOf(newNum).toString();
+
+                        HttpRequest.updateGoodsNumInShoppingCart("?id=" + g.id
+                                        + "&goodsNum=" + newNumStr,
                                 new HttpCallbackListener() {
                                     @Override
                                     public void onFinish(Object responese)
@@ -261,9 +270,7 @@ public class CartFragment
                                             @Override
                                             public void run()
                                             {
-                                                int newNum = Integer.valueOf(mGoodsNums.get(currGoodsIndex)) - 1;
-                                                String newNumStr = Integer.valueOf(newNum).toString();
-                                                deNum.setText(newNumStr);
+                                                goodsNum.setText(newNumStr);
                                                 mGoodsNums.set(currGoodsIndex, newNumStr);
                                             }
                                         });
@@ -281,7 +288,11 @@ public class CartFragment
                     @Override
                     public void onClick(View v)
                     {
-                        HttpRequest.updateGoodsNumInShoppingCart("?id=" + g.goodsId,
+                        int newNum = Integer.valueOf(mGoodsNums.get(currGoodsIndex)) + 1;
+                        final String newNumStr = Integer.valueOf(newNum).toString();
+
+                        HttpRequest.updateGoodsNumInShoppingCart("?id=" + g.id
+                                        + "&goodsNum=" + newNumStr,
                                 new HttpCallbackListener() {
                                     @Override
                                     public void onFinish(Object responese)
@@ -290,9 +301,7 @@ public class CartFragment
                                             @Override
                                             public void run()
                                             {
-                                                int newNum = Integer.valueOf(mGoodsNums.get(currGoodsIndex)) + 1;
-                                                String newNumStr = Integer.valueOf(newNum).toString();
-                                                deNum.setText(newNumStr);
+                                                goodsNum.setText(newNumStr);
                                                 mGoodsNums.set(currGoodsIndex, newNumStr);
                                             }
                                         });

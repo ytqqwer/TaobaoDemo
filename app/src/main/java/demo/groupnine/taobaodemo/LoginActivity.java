@@ -21,9 +21,9 @@ public class LoginActivity
     private EditText mPasswordET;
     private EditText mServerAddrET;
     private Button mLoginButton;
-    private String mAccount;
-    private String mPassword;
-    private String mServerAddr;
+    private String mAccount = "user_1";
+    private String mPassword = "passwd";
+    private String mServerAddr = "192.168.123.123:8080";
 
 
     // lifetime methods

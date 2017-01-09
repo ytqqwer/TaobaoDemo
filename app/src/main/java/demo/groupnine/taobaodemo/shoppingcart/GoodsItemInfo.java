@@ -8,6 +8,6 @@ public class GoodsItemInfo {
     public String goodsId;
     public String goodsName;
     public String goodsDescribe;
-    public String previewImageAddr;
+    public String imageAddr;
     public ArrayList<GoodsAttrString> goodsAttrs;
 }

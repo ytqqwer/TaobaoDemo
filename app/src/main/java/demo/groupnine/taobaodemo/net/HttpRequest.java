@@ -598,6 +598,6 @@ public class HttpRequest {
 
     public static void setServer(String addr)
     {
-        server = "http://" + addr + "/OSS";
+        server = "http://" + addr + "/oss";
     }
 }
