@@ -2,114 +2,114 @@
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#ffffff"
-    android:orientation="vertical">
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="#ffffff"
+             android:orientation="vertical">
 
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center">
-
-            <ImageView
-                android:id="@+id/cart_blank_list"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/doge" />
+                android:layout_gravity="center">
+
+            <ImageView
+                    android:id="@+id/cart_blank_list"
+                    android:layout_width="256dp"
+                    android:layout_height="256dp"
+                    android:src="@drawable/blank_sc"/>
 
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/cart_result_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+                android:id="@+id/cart_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
     </FrameLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:layout_gravity="bottom"
-        android:orientation="vertical">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/light_gray" />
-
-        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
 
-            <CheckBox
-                android:id="@+id/cart_all_check"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textColor="@color/black"
-                android:text="全选"/>
+            android:layout_gravity="bottom"
+            android:orientation="vertical">
 
-            <LinearLayout
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/light_gray"/>
+
+        <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="right">
+                android:orientation="horizontal">
 
-                <TextView
+            <CheckBox
+                    android:id="@+id/cart_all_check"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="4dp"
-                    android:textSize="12dp"
-                    android:textColor="#444444"
-                    android:text="合计："/>
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    android:text="全选"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
+            <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="8dp"
-                    android:textSize="12dp"
-                    android:textColor="@color/tb_red"
-                    android:text="¥ 0"/>
+                    android:gravity="right">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="8dp"
-                    android:textSize="8dp"
-                    android:textColor="#666666"
-                    android:text="不含运费"/>
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="4dp"
+                        android:textSize="12dp"
+                        android:textColor="#444444"
+                        android:text="合计："/>
 
                 <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="40dp"
-                    android:gravity="center"
-                    android:padding="8dp"
-                    android:textSize="12dp"
-                    android:background="@color/tb_red"
-                    android:textColor="@color/white"
-                    android:text="结算(0)"/>
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:id="@+id/cart_total"
+                        android:textSize="12dp"
+                        android:textColor="@color/tb_red"
+                        android:text="¥ 0"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:textSize="8dp"
+                        android:textColor="#666666"
+                        android:text="不含运费"/>
+
+                <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:id="@+id/cart_settle"
+                        android:textSize="12dp"
+                        android:background="@color/tb_red"
+                        android:textColor="@color/white"
+                        android:text="结算(0)"/>
 
             </LinearLayout>
 
         </LinearLayout>
 
         <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/light_gray" />
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/light_gray"/>
 
     </LinearLayout>
-
 
 
 </FrameLayout>

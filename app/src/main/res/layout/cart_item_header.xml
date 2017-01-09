@@ -25,6 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textColor="@color/black"
+            android:id="@+id/cart_header_shop_name"
             android:text="Shop Name"/>
 
         <ImageView
