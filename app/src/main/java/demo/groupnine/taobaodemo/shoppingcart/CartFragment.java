@@ -33,6 +33,7 @@ public class CartFragment
     // thread
     private boolean hasFetchedCart;
 
+
     // lifetime methods
 
     @Override
@@ -279,6 +280,7 @@ public class CartFragment
                                     @Override
                                     public void onError(Exception e)
                                     {
+                                        // do nothing
                                     }
                                 });
                     }
@@ -317,9 +319,31 @@ public class CartFragment
 
                 /* 3.7 删除商品 */
 
-                // TODO
-            }
+                final TextView delGoods = (TextView) eachGoodsView.findViewById(R.id.cart_body_goods_del);
+                delGoods.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        HttpRequest.deleteFromShoppingCart("?id=" + g.id,
+                                new HttpCallbackListener() {
+                                    @Override
+                                    public void onFinish(Object responese)
+                                    {
+                                        // TODO
+                                        // fetchCartList();
+                                        // updateCartListUI();
+                                    }
 
+                                    @Override
+                                    public void onError(Exception e)
+                                    {
+                                        // do noting
+                                    }
+                                });
+                    }
+                });
+
+            }
         }
     }
 
