@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import demo.groupnine.taobaodemo.account.OrderBrief;
 import demo.groupnine.taobaodemo.account.OrderDetail;
+import demo.groupnine.taobaodemo.account.UserInfo;
 import demo.groupnine.taobaodemo.homepage.Category;
 import demo.groupnine.taobaodemo.homepage.GoodsBrief;
 import demo.groupnine.taobaodemo.homepage.GoodsDetail;
@@ -574,6 +575,33 @@ public class HttpRequest {
 
                     if (listener != null) {
                         listener.onFinish(rs);
+                    }
+                } catch (Exception e) {
+                    if (listener != null) {
+                        listener.onError(e);
+                    }
+                }
+            }
+        }).start();
+    }
+
+
+    // 获取用户信息
+    public static void getUserInfo(final String UrlParam, final HttpCallbackListener listener)
+    {
+        new Thread(new Runnable() {
+            @Override
+            public void run()
+            {
+                try {
+                    String Url = server + "/getUserInfo.action" + UrlParam;
+                    String JsonStr = getUrlString(Url);
+
+                    Gson g = new Gson();
+                    UserInfo u = g.fromJson(JsonStr, UserInfo.class);
+
+                    if (listener != null) {
+                        listener.onFinish(u);
                     }
                 } catch (Exception e) {
                     if (listener != null) {
