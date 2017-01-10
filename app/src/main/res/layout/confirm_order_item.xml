@@ -2,15 +2,18 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!--
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#666666" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="6dp"
         android:background="@color/light_gray" />
-    -->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -132,7 +135,8 @@
             android:text="小计："
             android:padding="10dp"
             android:textSize="13dp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:id="@+id/order_item_sum"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -140,10 +144,14 @@
             android:text="¥ 0.00"
             android:padding="10dp"
             android:textSize="14dp"
-            android:textColor="@color/tb_red"
-            android:id="@+id/order_item_sum"/>
+            android:textColor="@color/tb_red"/>
 
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/light_gray" />
 
     <View
         android:layout_width="match_parent"

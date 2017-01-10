@@ -1,167 +1,169 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:background="#ffffff"
-             android:orientation="vertical">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical">
 
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical">
 
         <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/light_gray"/>
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/light_gray" />
 
         <LinearLayout
-                android:layout_width="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right">
+
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="right">
+                android:gravity="center"
+                android:padding="4dp"
+                android:text="合计："
+                android:textColor="#444444"
+                android:textSize="12dp" />
 
             <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="4dp"
-                    android:text="合计："
-                    android:textColor="#444444"
-                    android:textSize="12dp"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="¥ 0.00"
+                android:textColor="@color/tb_red"
+                android:textSize="12dp"
+                android:id="@+id/confirm_order_sum"/>
 
             <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="8dp"
-                    android:text="¥ 0.00"
-                    android:textColor="@color/tb_red"
-                    android:textSize="12dp"
-                    android:id="@+id/confirm_order_sum"/>
-
-            <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="40dp"
-                    android:background="@color/tb_red"
-                    android:gravity="center"
-                    android:padding="8dp"
-                    android:text="提交订单"
-                    android:textColor="@color/white"
-                    android:textSize="12dp"
-                    android:id="@+id/confirm_order"/>
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:background="@color/tb_red"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="提交订单"
+                android:textColor="@color/white"
+                android:textSize="12dp"
+                android:id="@+id/confirm_order"/>
 
         </LinearLayout>
 
         <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/light_gray"/>
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/light_gray" />
 
     </LinearLayout>
 
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <LinearLayout
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/confirm_receiver"
-                android:orientation="vertical">
-
             <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="8dp"
-                    android:src="@color/white"/>
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:src="@color/white" />
 
             <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:orientation="horizontal">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal">
 
                 <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center"
-                        android:padding="6dp"
-                        android:src="@drawable/guide_nearby_nm"/>
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:padding="6dp"
+                    android:src="@drawable/guide_nearby_nm" />
 
                 <LinearLayout
-                        android:layout_width="350dp"
-                        android:layout_height="90dp"
-                        android:orientation="vertical">
+                    android:layout_width="350dp"
+                    android:layout_height="90dp"
+                    android:orientation="vertical">
 
                     <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
                         <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="6dp"
+                            android:text="收货人："
+                            android:textColor="@color/black"
+                            android:textSize="12dp"
+                            android:id="@+id/receiver_name"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="right">
+
+                            <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="6dp"
-                                android:text="收货人："
+                                android:text="phone"
                                 android:textColor="@color/black"
                                 android:textSize="12dp"
-                                android:id="@+id/receiver_name"/>
-
-                        <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="right">
-
-                            <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="6dp"
-                                    android:text="phone"
-                                    android:textColor="@color/black"
-                                    android:textSize="12dp"
-                                    android:id="@+id/receiver_phone"/>
+                                android:id="@+id/receiver_phone"/>
 
                         </LinearLayout>
 
                     </LinearLayout>
 
                     <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="6dp"
-                            android:text="收货地址："
-                            android:textColor="@color/black"
-                            android:textSize="11dp"
-                            android:id="@+id/receiver_address"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="6dp"
+                        android:text="收货地址："
+                        android:textColor="@color/black"
+                        android:textSize="11dp"
+                        android:id="@+id/receiver_address"/>
 
                     <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
-                            android:text="(收货不便时，可选择免费代收货服务）"
-                            android:textColor="@color/tb_red"
-                            android:textSize="10dp"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:text="(收货不便时，可选择免费代收货服务）"
+                        android:textColor="@color/tb_red"
+                        android:textSize="10dp" />
 
                 </LinearLayout>
 
             </LinearLayout>
 
             <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="4dp"
-                    android:src="@color/tb_red"/>
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:src="@color/tb_red" />
 
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
-                android:id="@+id/confirm_order_recycler_view"
-                android:layout_below="@id/confirm_receiver"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+            android:id="@+id/confirm_order_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-    </LinearLayout>
+        </LinearLayout>
 
+    </android.support.v4.widget.NestedScrollView>
 
-</RelativeLayout>
+</FrameLayout>
