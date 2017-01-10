@@ -1,0 +1,25 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+              android:background="@color/light_gray"
+             tools:context="demo.groupnine.taobaodemo.account.OrderFragment">
+    <ImageView
+            android:id="@+id/orderPreview_no_order"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleY="0.8"
+            android:scaleX="0.8"
+            android:adjustViewBounds="true"
+            android:src="@drawable/no_order"
+    />
+    <!-- TODO: Update blank fragment layout -->
+    <ListView
+            android:id="@+id/orderPreview_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hello_blank_fragment"
+            android:gravity="center"
+        android:textColor="@color/black"/>
+
+</LinearLayout>
