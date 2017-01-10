@@ -19,7 +19,6 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import demo.groupnine.taobaodemo.R;
 import demo.groupnine.taobaodemo.homepage.GoodsAttrString;
-import demo.groupnine.taobaodemo.homepage.SearchActivity;
 import demo.groupnine.taobaodemo.net.HttpCallbackListener;
 import demo.groupnine.taobaodemo.net.HttpRequest;
 
@@ -84,7 +83,6 @@ public class CartFragment
                     @Override
                     public void onClick(View v)
                     {
-                        /*
                         Intent intent = new Intent(getActivity(), ConfirmOrderActivity.class);
                         ArrayList<ToSettleOrder> toSettle = new ArrayList<ToSettleOrder>();
                         for (int i = 0; i < mCarts.size(); i++) {
@@ -110,7 +108,6 @@ public class CartFragment
                         intent.putExtra("toSettle", g.toJson(toSettle));
                         intent.putExtra("toConfirm", g.toJson(toConfirm));
                         startActivity(intent);
-                        */
                     }
                 });
         if (isAdded()) {
