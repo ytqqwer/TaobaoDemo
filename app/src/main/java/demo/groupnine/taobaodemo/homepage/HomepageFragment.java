@@ -263,7 +263,7 @@ public class HomepageFragment
 
         // public methods
 
-        public void bindCategory(CategoryGoods c)
+        public void bindCategory(final CategoryGoods c)
         {
             mCategoryNameTV.setText(c.name);
 
@@ -301,11 +301,9 @@ public class HomepageFragment
                     @Override
                     public void onClick(View v)
                     {
-                        /*
                         Intent intent = new Intent(getActivity(), GoodsDetailActivity.class);
-                        intent.putExtra("goodsId", g.goodsId);
+                        intent.putExtra("goodsId", c.goods.get(mAdded).goodsId);
                         startActivity(intent);
-                        */
                     }
                 });
             }

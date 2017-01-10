@@ -266,7 +266,6 @@ public class SearchFragment
             mGoodsNameTV.setText(g.goodsName);
             mGoodsPriceTV.setText("￥ " + g.price);
             mGoodsSalesTV.setText(g.sales + "人付款");
-            /*
             mItemImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v)
@@ -276,7 +275,6 @@ public class SearchFragment
                     startActivity(intent);
                 }
             });
-            */
             Drawable placeHolder = getResources().getDrawable(R.drawable.img_place_holder);
             mItemImageView.setImageDrawable(placeHolder);
 

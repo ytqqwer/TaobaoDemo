@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import demo.groupnine.taobaodemo.R;
 import demo.groupnine.taobaodemo.homepage.GoodsAttrString;
+import demo.groupnine.taobaodemo.homepage.GoodsDetailActivity;
 import demo.groupnine.taobaodemo.net.HttpCallbackListener;
 import demo.groupnine.taobaodemo.net.HttpRequest;
 
@@ -275,11 +276,9 @@ public class CartFragment
                     @Override
                     public void onClick(View v)
                     {
-                        /*
                         Intent intent = new Intent(getActivity(), GoodsDetailActivity.class);
                         intent.putExtra("goodsId", gid);
                         startActivity(intent);
-                        */
                     }
                 });
 
