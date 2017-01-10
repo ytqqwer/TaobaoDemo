@@ -39,10 +39,18 @@
                 android:screenOrientation="portrait"
                 android:parentActivityName=".MainActivity">
         </activity>
+
         <activity
-                android:screenOrientation="portrait"
-                android:name=".homepage.GoodsDetailActivity">
+                android:name=".homepage.GoodsDetailActivity"
+                android:label="GoodsDetailActivity"
+                android:screenOrientation="portrait">
         </activity>
+
+        <activity android:name=".shoppingcart.ConfirmOrderActivity"
+                  android:label="ConfirmOrderActivity"
+                  android:screenOrientation="portrait">
+        </activity>
+
     </application>
 
 

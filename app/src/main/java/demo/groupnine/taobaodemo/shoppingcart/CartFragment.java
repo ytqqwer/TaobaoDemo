@@ -108,6 +108,7 @@ public class CartFragment
                         }
 
                         Gson g = new Gson();
+                        Log.d(TAG, g.toJson(toSettle));
                         intent.putExtra("toSettle", g.toJson(toSettle));
                         Log.d(TAG, g.toJson(toConfirm));
                         intent.putExtra("toConfirm", g.toJson(toConfirm));
@@ -173,17 +174,22 @@ public class CartFragment
         mSCGoodsNums = new ArrayList<>();
         mSCPrices = new ArrayList<>();
 
-        for (ShoppingCart c : mCarts) {
+        for (int i = 0; i < mCarts.size(); i++) {
+            ShoppingCart c = mCarts.get(i);
+            int num = 0;
+            double price = 0;
             for (GoodsItemInSC g : c.goodsInThisShop) {
-                mSCGoodsNums.add(Integer.valueOf(g.goodsNum));
+                num += Integer.valueOf(g.goodsNum);
                 String attrId = g.attributeId;
-                for (int i = 0; i < g.goods.goodsAttrs.size(); i++) {
-                    if (attrId.equals(g.goods.goodsAttrs.get(i).attributeId)) {
-                        mSCPrices.add(Double.valueOf(g.goods.goodsAttrs.get(i).price) * Integer.valueOf(g.goodsNum));
+                for (int j = 0; j < g.goods.goodsAttrs.size(); j++) {
+                    if (attrId.equals(g.goods.goodsAttrs.get(j).attributeId)) {
+                        price += Double.valueOf(g.goods.goodsAttrs.get(j).price) * Integer.valueOf(g.goodsNum);
                         break;
                     }
                 }
             }
+            mSCGoodsNums.add(num);
+            mSCPrices.add(price);
         }
     }
 

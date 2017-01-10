@@ -1,9 +1,10 @@
 package demo.groupnine.taobaodemo.shoppingcart;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,8 @@ import demo.groupnine.taobaodemo.R;
 import demo.groupnine.taobaodemo.net.HttpCallbackListener;
 import demo.groupnine.taobaodemo.net.HttpRequest;
 
-public class ConfirmOrderActivity extends Activity {
+public class ConfirmOrderActivity extends AppCompatActivity {
+    private static final String TAG = "ConfirmOrderActivity";
 
     //data model
     private List<ToSettleOrder> mOrder;
@@ -72,7 +74,9 @@ public class ConfirmOrderActivity extends Activity {
                     public void onClick(View v) {
                         Gson g = new Gson();
                         List<OrderInfo> orders = mO.orders;
-                        HttpRequest.confirmOrder("?orders=" + g.toJson(orders) + "&receiverId=" + mReceiver.receiverId + "&payMethod=在线支付",
+                        HttpRequest.confirmOrder("?orders=" + g.toJson(orders) +
+                                    "&receiverId=" + mReceiver.receiverId +
+                                    "&payMethod=在线支付",
                                 new HttpCallbackListener() {
                                     @Override
                                     public void onFinish(Object responese) {
@@ -81,7 +85,6 @@ public class ConfirmOrderActivity extends Activity {
 
                                     @Override
                                     public void onError(Exception e) {
-
                                     }
                                 });
                     }
@@ -137,7 +140,6 @@ public class ConfirmOrderActivity extends Activity {
 
     private class OrderHolder extends RecyclerView.ViewHolder {
 
-        private ToSettleOrder mOrder;
         private TextView mShopNameTV;
         private TextView mGoodsNumTV;
         private TextView mPriceSumTV;
@@ -189,6 +191,7 @@ public class ConfirmOrderActivity extends Activity {
         @Override
         public void onBindViewHolder(final ConfirmOrderActivity.OrderHolder holder, int position) {
             ToSettleOrder item = mOrder.get(position);
+            Log.d(TAG, "create holder " + position);
             holder.bindOrder(item);
         }
 
