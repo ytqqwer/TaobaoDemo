@@ -1,5 +1,6 @@
 package demo.groupnine.taobaodemo.shoppingcart;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,8 +16,10 @@ import java.util.List;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import com.google.gson.Gson;
 import demo.groupnine.taobaodemo.R;
 import demo.groupnine.taobaodemo.homepage.GoodsAttrString;
+import demo.groupnine.taobaodemo.homepage.SearchActivity;
 import demo.groupnine.taobaodemo.net.HttpCallbackListener;
 import demo.groupnine.taobaodemo.net.HttpRequest;
 
@@ -26,10 +29,15 @@ public class CartFragment
 
     // data model
     private List<ShoppingCart> mCarts;
+    private ArrayList<Double> mSCPrices;
+    private ArrayList<Integer> mSCGoodsNums;
     //shopping cart list widget
     private RecyclerView mCartRecyclerView;
     private CartAdapter mAdapter;
     private View mBlankListPrompt;
+    //confirm bar widget
+    private TextView mCartTotalMoneyTV;
+    private TextView mCartSettleTV;
     // thread
     private boolean hasFetchedCart;
 
@@ -47,6 +55,7 @@ public class CartFragment
         getActivity().setTitle("Cart");
 
         fetchCartList();
+        calculatePriceAndNum();
     }
 
     @Nullable
@@ -67,6 +76,47 @@ public class CartFragment
             updateCartListUI();
         }
 
+        // confirm bar widget
+        mCartTotalMoneyTV = (TextView) v.findViewById(R.id.cart_total);
+        mCartSettleTV = (TextView) v.findViewById(R.id.cart_settle);
+        mCartSettleTV
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        /*
+                        Intent intent = new Intent(getActivity(), ConfirmOrderActivity.class);
+                        ArrayList<ToSettleOrder> toSettle = new ArrayList<ToSettleOrder>();
+                        for (int i = 0; i < mCarts.size(); i++) {
+                            toSettle.add(new ToSettleOrder(
+                                    mCarts.get(i).shopName
+                                    , mSCGoodsNums.get(i).toString()
+                                    , mSCPrices.get(i).toString()));
+                        }
+
+                        ToConfirmOrders toConfirm = new ToConfirmOrders();
+                        for (int i = 0; i < mCarts.size(); i++) {
+                            OrderInfo o = new OrderInfo();
+
+                            o.shopId = mCarts.get(i).shopId;
+                            for (GoodsItemInSC g : mCarts.get(i).goodsInThisShop) {
+                                o.id.add(g.id);
+                            }
+
+                            toConfirm.orders.add(o);
+                        }
+
+                        Gson g = new Gson();
+                        intent.putExtra("toSettle", g.toJson(toSettle));
+                        intent.putExtra("toConfirm", g.toJson(toConfirm));
+                        startActivity(intent);
+                        */
+                    }
+                });
+        if (isAdded()) {
+            updateConfirmBar();
+        }
+
         return v;
     }
 
@@ -79,7 +129,9 @@ public class CartFragment
         super.onHiddenChanged(hidden);
         if (!hidden) {
             fetchCartList();
+            calculatePriceAndNum();
             updateCartListUI();
+            updateConfirmBar();
         }
     }
 
@@ -114,6 +166,26 @@ public class CartFragment
         }
     }
 
+    private void calculatePriceAndNum()
+    {
+
+        mSCGoodsNums = new ArrayList<>();
+        mSCPrices = new ArrayList<>();
+
+        for (ShoppingCart c : mCarts) {
+            for (GoodsItemInSC g : c.goodsInThisShop) {
+                mSCGoodsNums.add(Integer.valueOf(g.goodsNum));
+                String attrId = g.attributeId;
+                for (int i = 0; i < g.goods.goodsAttrs.size(); i++) {
+                    if (attrId.equals(g.goods.goodsAttrs.get(i).attributeId)) {
+                        mSCPrices.add(Double.valueOf(g.goods.goodsAttrs.get(i).price) * Integer.valueOf(g.goodsNum));
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
     private void updateCartListUI()
     {
         if (mCarts.size() == 0) {
@@ -126,6 +198,23 @@ public class CartFragment
             mAdapter = new CartAdapter(mCarts);
             mCartRecyclerView.setAdapter(mAdapter);
         }
+    }
+
+    private void updateConfirmBar()
+    {
+        double price = 0;
+        for (double p : mSCPrices) {
+            price += p;
+        }
+        // TODO
+        mCartTotalMoneyTV.setText(Double.valueOf(price).toString());
+
+        int num = 0;
+        for (int n : mSCGoodsNums) {
+            num += n;
+        }
+
+        mCartSettleTV.setText("结算(" + num + ")");
     }
 
 
@@ -273,6 +362,10 @@ public class CartFragment
                                             {
                                                 goodsNum.setText(newNumStr);
                                                 mGoodsNums.set(currGoodsIndex, newNumStr);
+                                                fetchCartList();
+                                                calculatePriceAndNum();
+                                                updateConfirmBar();
+
                                             }
                                         });
                                     }
@@ -305,6 +398,9 @@ public class CartFragment
                                             {
                                                 goodsNum.setText(newNumStr);
                                                 mGoodsNums.set(currGoodsIndex, newNumStr);
+                                                fetchCartList();
+                                                calculatePriceAndNum();
+                                                updateConfirmBar();
                                             }
                                         });
                                     }
