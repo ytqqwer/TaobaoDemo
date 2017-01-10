@@ -127,7 +127,7 @@ public class ConfirmOrderActivity extends Activity {
 
         String toConfirm = getIntent().getStringExtra("toConfirm");
         Gson g2 = new Gson();
-        mO = g2.fromJson(toSettle, ToConfirmOrders.class);
+        mO = g2.fromJson(toConfirm, ToConfirmOrders.class);
     }
 
 

@@ -94,10 +94,12 @@ public class CartFragment
                         }
 
                         ToConfirmOrders toConfirm = new ToConfirmOrders();
+                        toConfirm.orders = new ArrayList<OrderInfo>();
                         for (int i = 0; i < mCarts.size(); i++) {
                             OrderInfo o = new OrderInfo();
 
                             o.shopId = mCarts.get(i).shopId;
+                            o.id = new ArrayList<String>();
                             for (GoodsItemInSC g : mCarts.get(i).goodsInThisShop) {
                                 o.id.add(g.id);
                             }
@@ -107,6 +109,7 @@ public class CartFragment
 
                         Gson g = new Gson();
                         intent.putExtra("toSettle", g.toJson(toSettle));
+                        Log.d(TAG, g.toJson(toConfirm));
                         intent.putExtra("toConfirm", g.toJson(toConfirm));
                         startActivity(intent);
                     }
