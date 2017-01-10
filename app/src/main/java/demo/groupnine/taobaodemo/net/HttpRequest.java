@@ -11,6 +11,7 @@ import demo.groupnine.taobaodemo.homepage.Category;
 import demo.groupnine.taobaodemo.homepage.GoodsBrief;
 import demo.groupnine.taobaodemo.homepage.GoodsDetail;
 import demo.groupnine.taobaodemo.homepage.ShopInfo;
+import demo.groupnine.taobaodemo.shoppingcart.Receiver;
 import demo.groupnine.taobaodemo.shoppingcart.Result;
 import demo.groupnine.taobaodemo.shoppingcart.ShoppingCart;
 import demo.groupnine.taobaodemo.shoppingcart.SuccessFail;
@@ -544,6 +545,35 @@ public class HttpRequest {
 
                     if (listener != null) {
                         listener.onFinish(r);
+                    }
+                } catch (Exception e) {
+                    if (listener != null) {
+                        listener.onError(e);
+                    }
+                }
+            }
+        }).start();
+    }
+
+
+    // 获取所有收货人信息
+    public static void getReceivers(final String UrlParam, final HttpCallbackListener listener)
+    {
+        new Thread(new Runnable() {
+            @Override
+            public void run()
+            {
+                try {
+                    String Url = server + "/getReceivers.action" + UrlParam;
+                    String JsonStr = getUrlString(Url);
+
+                    Gson g = new Gson();
+                    Type t = new TypeToken<ArrayList<Receiver>>() {
+                    }.getType();
+                    ArrayList<Receiver> rs = g.fromJson(JsonStr, t);
+
+                    if (listener != null) {
+                        listener.onFinish(rs);
                     }
                 } catch (Exception e) {
                     if (listener != null) {
