@@ -23,7 +23,7 @@ public class LoginActivity
     private Button mLoginButton;
     private String mAccount = "user_1";
     private String mPassword = "passwd";
-    private String mServerAddr = "192.168.123.123:8080";
+    private String mServerAddr = "10.101.252.144:8080";
 
 
     // lifetime methods
