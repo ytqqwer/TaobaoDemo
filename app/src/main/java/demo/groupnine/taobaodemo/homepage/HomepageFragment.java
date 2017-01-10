@@ -152,11 +152,13 @@ public class HomepageFragment
 
         // 等待所有类别都从服务器获取完毕
         while (mFetchedCategoryCount != l1Names.length) {
+            /*
             try {
                 Thread.sleep(50);
             } catch (InterruptedException e) {
                 // do nothing
             }
+            */
         }
     }
 
@@ -267,7 +269,8 @@ public class HomepageFragment
         {
             mCategoryNameTV.setText(c.name);
 
-            for (mAdded = 0; mAdded < c.goods.size(); mAdded++) {
+            //for (mAdded = 0; mAdded < c.goods.size(); mAdded++) {
+            for (mAdded = 0; mAdded < 3; mAdded++) {
 
                 final ImageView currView = mGoodsImageViews.get(mAdded);
 
@@ -297,12 +300,13 @@ public class HomepageFragment
 
                 /* 2. 监听器 */
 
+                final int currIndex = mAdded;
                 currView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v)
                     {
                         Intent intent = new Intent(getActivity(), GoodsDetailActivity.class);
-                        intent.putExtra("goodsId", c.goods.get(mAdded).goodsId);
+                        intent.putExtra("goodsId", c.goods.get(currIndex).goodsId);
                         startActivity(intent);
                     }
                 });

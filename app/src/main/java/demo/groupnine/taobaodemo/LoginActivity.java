@@ -149,12 +149,14 @@ public class LoginActivity
         if (!HttpRequest.loginSuccess) {
             HttpRequest.login("?phone=" + mAccount + "&password=" + mPassword);
             while (!HttpRequest.hasTriedLogin) {
+                /*
                 try {
                     Thread.sleep(200);
                 } catch (InterruptedException e) {
                     // TODO
                     // why InterruptedException ?
                 }
+                */
             }
         }
     }
